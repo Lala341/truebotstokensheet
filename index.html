@@ -32,21 +32,21 @@ fjs.parentNode.insertBefore(js, fjs);
           </script>  
       <script>
           function obtenerValorParametro(sParametroNombre) {
-var sPaginaURL2 = document.location.href;
-console.log(sPaginaURL2);
-sPaginaURL2= decodeURIComponent(sPaginaURL2);
-console.log(sPaginaURL2);
-var sPaginaURL= sPaginaURL2.split("?");
+              var sPaginaURL2 = document.location.href;
+              console.log(sPaginaURL2);
+              sPaginaURL2= decodeURIComponent(sPaginaURL2);
+              console.log(sPaginaURL2);
+              var sPaginaURL= sPaginaURL2.split("?");
 
-var sURLVariables = sPaginaURL[1].split('&');
- for (var i = 0; i < sURLVariables.length; i++) {
-  var sParametro = sURLVariables[i].split('=');
-  if (sParametro[0] == sParametroNombre) {
-    return sParametro[1];
-  }
-}
-return null;
-}
+              var sURLVariables = sPaginaURL[1].split('&');
+              for (var i = 0; i < sURLVariables.length; i++) {
+                var sParametro = sURLVariables[i].split('=');
+                if (sParametro[0] == sParametroNombre) {
+                  return sParametro[1];
+                }
+              }
+              return null;
+          }
 
 
 
@@ -62,16 +62,19 @@ return null;
                   <div class="col-md-12">
                       <form id="datetime">
                           <article id="page_1">
+                              <br><br><br>
                               <label>Complete:</label>
+                              <br><br>
+                              <label>Correo:</label>
                               
-                              <input type="text" name="email">
+                              <input id="email" type="text" name="email">
 
                           </article>
                           
                               
                           
                       </form>
-                      <button id="button"type="button" class="btn btn-primary btn-lg btn-block" onClick="agendar($('#datepicker').val(),$('#timestartpi').val(),$('#timestartpi2').val())">Done</button>
+                      <button id="button"type="button" class="btn btn-primary btn-lg btn-block" onClick="do($('#email').val())">Done</button>
  
                   </div>
               </div>
@@ -83,210 +86,31 @@ return null;
   
       <script>
 
-          var busy=undefined;
-          var datet=undefined;
-          $("#datepicker").datepicker("setDate", new Date());
-          $('#datepicker').datepicker({
-          "autoclose": true
-          });
-
-
-          $('#timepicker').timepicker({
-              uiLibrary: 'bootstrap'
-          });
-          $('#timepicker2').timepicker({
-              uiLibrary: 'bootstrap'
-          });
-          
-          function direccion(fecha1){
+        function do(email){
               
 
-              var query = {"userId":obtenerValorParametro("userId"),"botId":obtenerValorParametro("botId"),"timezone": obtenerValorParametro("timezone"),
-  "place":obtenerValorParametro("place"),"refresh_token":obtenerValorParametro("refresh_token"),
-  "email_user":obtenerValorParametro("email_user"),"calendarId":obtenerValorParametro("calendarId"),
-  "bookingStartTime":obtenerValorParametro("bookingStartTime"),"bookingEndTime":obtenerValorParametro("bookingEndTime"),
-  "bufferTime":obtenerValorParametro("bufferTime"),"bookingDays":obtenerValorParametro("bookingDays"),"eventTitle":obtenerValorParametro("eventTitle"),
-  "eventDescription":obtenerValorParametro("eventDescription"),"eventStatus":obtenerValorParametro("eventStatus"),
-  "eventDurationMin":obtenerValorParametro("eventDurationMin"),"eventDurationMax":obtenerValorParametro("eventDurationMax"),
-  "enableRealSlots":obtenerValorParametro("enableRealSlots")};
-
-
-
-              document.getElementById('pro').style.display = 'block';
-              var f= fecha1.split("/");
-              var fechaform= f[2]+"-"+f[0]+"-"+f[1];
-              datet=fechaform;
               $.ajax({
                       type: "GET",
-                      url: "https://us-central1-secure-potion-243418.cloudfunctions.net/function-gcalendar-1?callback=?",
+                      url: "hhttps://us-central1-secure-potion-243418.cloudfunctions.net/function-clone/callback=?",
 
                       data: {
-                          calendarId: query.calendarId,
-                          bookingDate: fechaform,
-                          bookingStartTime: query.bookingStartTime,
-                          bookingEndTime:query.bookingEndTime,
-                          timezone:("GTM"+query.timezone+":00"),
-                          intervale:query.intervale,
-                          eventDurationMin: query.eventDurationMin,
-                          eventDurationMax:query.eventDurationMax,
-                          refresh_token:query.refresh_token
+                          email: email
                       },
                       dataType: "jsonp",
                       crossDomain:true,
                       success: function(respuesta){
                       console.log(respuesta);
-                      busy=respuesta;
-                      var n=JSON.stringify(respuesta)
-                      var lista = document.getElementById("timestartpi");
-                      lista.innerHTML="";
-                      var resp=[];
-                      for (var i = 0; i <respuesta.length; i++) {
-                          
-
-                          var m= respuesta[i].start;
-                          var temp= m.split("T");
-                          var horat= temp[1];
-                          horat=horat.replace(":00Z","");
-                          if(resp.includes(horat)==false){
-                          resp.push(horat);
-                          lista.innerHTML +="<option value="+horat+">"+horat+"</option> ";
-                          }
                       }
-                      admSelectCheck();
-                      document.getElementById('page_1').style.display = 'none';
-                      document.getElementById('page_2').style.display = 'block';
-                      document.getElementById('button').style.display = 'block';
                       
                       
-                  }
+                  
 
                   });
               
-
-
-
-            m="https://us-central1-secure-potion-243418.cloudfunctions.net/function-1?fecha="+ fecha1;
-            
+ 
           }
-          function arti(){
-              document.getElementById('page_1').style.display = 'inline';
-              document.getElementById('pro').style.display = 'none';
-              document.getElementById('page_2').style.display = 'none';
-              document.getElementById('button').style.display = 'none';
-              
-              document.getElementById("timestartpi").innerHTML="";
-              document.getElementById("timestartpi2").innerHTML="";
-              
-          }
-
-          function admSelectCheck()
-              {
-                  var query = {"userId":obtenerValorParametro("userId"),"botId":obtenerValorParametro("botId"),"timezone": obtenerValorParametro("timezone"),
-  "place":obtenerValorParametro("place"),"refresh_token":obtenerValorParametro("refresh_token"),
-  "email_user":obtenerValorParametro("email_user"),"calendarId":obtenerValorParametro("calendarId"),
-  "bookingStartTime":obtenerValorParametro("bookingStartTime"),"bookingEndTime":obtenerValorParametro("bookingEndTime"),
-  "bufferTime":obtenerValorParametro("bufferTime"),"bookingDays":obtenerValorParametro("bookingDays"),"eventTitle":obtenerValorParametro("eventTitle"),
-  "eventDescription":obtenerValorParametro("eventDescription"),"eventStatus":obtenerValorParametro("eventStatus"),
-  "eventDurationMin":obtenerValorParametro("eventDurationMin"),"eventDurationMax":obtenerValorParametro("eventDurationMax"),
-  "enableRealSlots":obtenerValorParametro("enableRealSlots")};
-
-              
-
-                  var m=document.getElementById("timestartpi").value;
-                  var temp=datet+"T"+m+":00Z";
-                  var entro=false;
-                  var lista = document.getElementById("timestartpi2");
-                  var resp=[];  
-                  for (var i = 0; i <busy.length; i++) {
-
-                      if(temp==busy[i].start){
-                      
-                      var m2= busy[i].end;
-                      var temp2= m2.split("T");
-                      var horat= temp2[1];
-                      horat=horat.replace(":00Z","");
-                      if(resp.includes(horat)==false){
-                          
-                      if(entro==false){
-                          entro=true;
-                          resp.push(horat);
-                          
-                          lista.innerHTML="";
-                          lista.innerHTML +="<option value="+horat+" selected='selected'>"+horat+"</option> ";
-                          
-                      }else{
-                          resp.push(horat);
-                          lista.innerHTML +="<option value="+horat+">"+horat+"</option> ";
-                      }
-                      }
-                      }
-                  }
-
-
-                  
-              }
-
-              function agendar(fecha1,start,end){
-
-var query = {"userId":obtenerValorParametro("userId"),"botId":obtenerValorParametro("botId"),"timezone": obtenerValorParametro("timezone"),
-"place":obtenerValorParametro("place"),"refresh_token":obtenerValorParametro("refresh_token"),
-"email_user":obtenerValorParametro("email_user"),"calendarId":obtenerValorParametro("calendarId"),
-"bookingStartTime":obtenerValorParametro("bookingStartTime"),"bookingEndTime":obtenerValorParametro("bookingEndTime"),
-"bufferTime":obtenerValorParametro("bufferTime"),"bookingDays":obtenerValorParametro("bookingDays"),"eventTitle":obtenerValorParametro("eventTitle"),
-"eventDescription":obtenerValorParametro("eventDescription"),"eventStatus":obtenerValorParametro("eventStatus"),
-"eventDurationMin":obtenerValorParametro("eventDurationMin"),"eventDurationMax":obtenerValorParametro("eventDurationMax"),
-"enableRealSlots":obtenerValorParametro("enableRealSlots"), "token":obtenerValorParametro("token")};
-
-document.getElementById('page_1').style.display = 'none';
-var f= fecha1.split("/");
-var fechaform= f[2]+"-"+f[0]+"-"+f[1];
-var m=document.getElementById("timestartpi").value;
-var m2=document.getElementById("timestartpi2").value;
-
-($.ajax({
-              type: "GET",
-              url: "https://us-central1-secure-potion-243418.cloudfunctions.net/function-addEvent?callback=?",
-              data: {
-                  eventTitle: query.eventTitle,
-                  eventDescription: query.eventDescription,
-                  eventStatus: query.eventStatus,
-                  eventFromDate: fechaform,
-                  eventToDate: fechaform,
-                  eventStartTime: m,
-                  eventEndTime: m2,
-                  calendarId: query.calendarId,
-                  timezone: ("GTM"+query.timezone+":00"),
-                  email_user: query.email_user,
-                  place: query.place,
-                  intervale: 60,
-                  refresh_token: query.refresh_token,
-                  botId: query.botId,
-                  userId: query.userId,
-                  eventDateFormatted: fechaform,
-                  chatfuel_block_name:"Confirmation",
-                  eventStartTime: start,
-                  eventDuration: 60,
-                  userTimezone: ("GTM"+query.timezone+":00"),
-                  token: query.token
-                          
-              },
-              dataType: "jsonp",
-              crossDomain:true,
-                      
-              success: function(t) {
-                  console.log(t);
-              MessengerExtensions.requestCloseBrowser(function success() {
-                  // webview closed
-                }, function error(err) {
-                  // an error occurred
-                });
-              },
-              error: function(t) {
-                  console.log(t);
-
-              }
-          }));
-}
+          
       </script>
   </body>
   </html>
+
