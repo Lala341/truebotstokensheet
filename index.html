@@ -1,108 +1,85 @@
 
     
 <html>
-  <head>
-  
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Clone Bot</title>
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-      <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-      <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-       
-     
-      <script>
-          (function(d, s, id){
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) {return;}
-js = d.createElement(s); js.id = id;
-js.src = "https://connect.facebook.net/en_US/messenger.Extensions.js";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'Messenger'));
-
-
-          </script>  
-      <script>
-          function obtenerValorParametro(sParametroNombre) {
-              var sPaginaURL2 = document.location.href;
-              console.log(sPaginaURL2);
-              sPaginaURL2= decodeURIComponent(sPaginaURL2);
-              console.log(sPaginaURL2);
-              var sPaginaURL= sPaginaURL2.split("?");
-
-              var sURLVariables = sPaginaURL[1].split('&');
-              for (var i = 0; i < sURLVariables.length; i++) {
-                var sParametro = sURLVariables[i].split('=');
-                if (sParametro[0] == sParametroNombre) {
-                  return sParametro[1];
-                }
-              }
-              return null;
-          }
-          
-
-
-      </script>
-  
-  
-  </head>
-  <body>
-          
-              <div class="container">
-              <div class="row">
-                  <div id="te"class="col-md-12">
-                       <br><br><br>
-                              <label>Complete</label>
-                              <br><br>
-                              <label>Correo:</label>
-                              
-                              <input id="email" type="text" name="email">
-
-                         
-                      <button id="button"type="button" class="btn btn-primary btn-lg btn-block" onClick="dou()">Done</button>
- 
-                  </div>
-              </div>
-
-
-
- 
-      
-  
-              <script>
-                  function dou(){
-                      
-                      var email=document.getElementById("email").value;
-                        $.ajax({
-                                type: "GET",
-                                url: "https://us-central1-secure-potion-243418.cloudfunctions.net/function-clone?callback=?",
-          
-                                data: {
-                                    email: email
-                                },
-                                dataType: "jsonp",
-                                crossDomain:true,
-                                success: function(respuesta){
-                                console.log(respuesta);
-                                var lista = document.getElementById("te");
-                                lista.innerHTML +="<br>";
-                                lista.innerHTML +="<p>"+"La url de su bot es:"+respuesta.url+"</p> ";
-                                }
-                                
-                                
-                            
-          
-                            });
-                        
+        <head>
+        
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Clone Bot</title>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+            <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+             
            
+            <script>
+                (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/messenger.Extensions.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'Messenger'));
+      
+      
+                </script>  
+            <script>
+                function obtenerValorParametro(sParametroNombre) {
+                    var sPaginaURL2 = document.location.href;
+                    console.log(sPaginaURL2);
+                    sPaginaURL2= decodeURIComponent(sPaginaURL2);
+                    console.log(sPaginaURL2);
+                    var sPaginaURL= sPaginaURL2.split("?");
+      
+                    var sURLVariables = sPaginaURL[1].split('&');
+                    for (var i = 0; i < sURLVariables.length; i++) {
+                      var sParametro = sURLVariables[i].split('=');
+                      if (sParametro[0] == sParametroNombre) {
+                        return sParametro[1];
+                      }
                     }
+                    return null;
+                }
+                
+      
+      
+            </script>
         
         
-              </script>
-  </body>
-  </html>
-
+        </head>
+        <body onload="dou()">
+                
+                    <div class="container">
+                    <div class="row">
+                        <div id="te"class="col-md-12">
+                             
+                        </div>
+                    </div>
+      
+      
+      
+       
+            
+        
+                    <script>
+                        function dou(){
+                            
+                          MessengerExtensions.requestCloseBrowser(function success() {
+                              // webview closed
+                            }, function error(err) {
+                              // an error occurred
+                            });
+                          
+                              
+                 
+                      }
+              
+              
+                    </script>
+        </body>
+        </html>
+      
+      
