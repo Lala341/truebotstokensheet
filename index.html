@@ -54,9 +54,9 @@ fjs.parentNode.insertBefore(js, fjs);
           
               <div class="container">
               <div class="row">
-                  <div class="col-md-12">
+                  <div id="te"class="col-md-12">
                        <br><br><br>
-                              <label>Complete:</label>
+                              <label>Complete</label>
                               <br><br>
                               <label>Correo:</label>
                               
@@ -88,6 +88,9 @@ fjs.parentNode.insertBefore(js, fjs);
                                 crossDomain:true,
                                 success: function(respuesta){
                                 console.log(respuesta);
+                                var lista = document.getElementById("te");
+                                lista.innerHTML +="<br>";
+                                lista.innerHTML +="<p>"+"La url de su bot es:"+respuesta.url+"</p> ";
                                 }
                                 
                                 
