@@ -42,29 +42,7 @@ fjs.parentNode.insertBefore(js, fjs);
               }
               return null;
           }
-          function dou(){
-              
-              var email=document.getElementById("email").value;
-                $.ajax({
-                        type: "GET",
-                        url: "hhttps://us-central1-secure-potion-243418.cloudfunctions.net/function-clone/callback=?",
-  
-                        data: {
-                            email: email
-                        },
-                        dataType: "jsonp",
-                        crossDomain:true,
-                        success: function(respuesta){
-                        console.log(respuesta);
-                        }
-                        
-                        
-                    
-  
-                    });
-                
-   
-            }
+          
 
 
       </script>
@@ -94,7 +72,33 @@ fjs.parentNode.insertBefore(js, fjs);
  
       
   
-      
+              <script>
+                  function dou(){
+                      
+                      var email=document.getElementById("email").value;
+                        $.ajax({
+                                type: "GET",
+                                url: "https://us-central1-secure-potion-243418.cloudfunctions.net/function-clone/callback=?",
+          
+                                data: {
+                                    email: email
+                                },
+                                dataType: "jsonp",
+                                crossDomain:true,
+                                success: function(respuesta){
+                                console.log(respuesta);
+                                }
+                                
+                                
+                            
+          
+                            });
+                        
+           
+                    }
+        
+        
+              </script>
   </body>
   </html>
 
