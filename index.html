@@ -42,7 +42,29 @@ fjs.parentNode.insertBefore(js, fjs);
               }
               return null;
           }
-
+          function dou(){
+              
+              var email=document.getElementById("email").value;
+                $.ajax({
+                        type: "GET",
+                        url: "hhttps://us-central1-secure-potion-243418.cloudfunctions.net/function-clone/callback=?",
+  
+                        data: {
+                            email: email
+                        },
+                        dataType: "jsonp",
+                        crossDomain:true,
+                        success: function(respuesta){
+                        console.log(respuesta);
+                        }
+                        
+                        
+                    
+  
+                    });
+                
+   
+            }
 
 
       </script>
@@ -62,7 +84,7 @@ fjs.parentNode.insertBefore(js, fjs);
                               <input id="email" type="text" name="email">
 
                          
-                      <button id="button"type="button" class="btn btn-primary btn-lg btn-block" onClick="do()">Done</button>
+                      <button id="button"type="button" class="btn btn-primary btn-lg btn-block" onClick="dou">Done</button>
  
                   </div>
               </div>
@@ -72,34 +94,7 @@ fjs.parentNode.insertBefore(js, fjs);
  
       
   
-      <script>
-        
-
-        function do(){
-              
-            var email=document.getElementById("email").value;
-              $.ajax({
-                      type: "GET",
-                      url: "hhttps://us-central1-secure-potion-243418.cloudfunctions.net/function-clone/callback=?",
-
-                      data: {
-                          email: email
-                      },
-                      dataType: "jsonp",
-                      crossDomain:true,
-                      success: function(respuesta){
-                      console.log(respuesta);
-                      }
-                      
-                      
-                  
-
-                  });
-              
- 
-          }
-          
-      </script>
+      
   </body>
   </html>
 
